@@ -1,16 +1,210 @@
 ---
-import "../styles/global.css";
+import "@fontsource-variable/rubik"
+import "../styles/global.css"
+import { menuData } from "../data/menu"
+import { businessInfo } from "../data/business"
+import { getCurrentStatus, formatScheduleHours } from "../utils/hours"
+import { Phone, Clock, MapPin, MessageCircle } from "@lucide/astro"
+import HungerStationIcon from "../components/HungerStationIcon.astro"
+
+const currentStatus = getCurrentStatus(businessInfo.hours)
 ---
 
-<html lang="en">
+<html lang="ar" dir="rtl">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
+    <title>مطعم تكوين</title>
   </head>
-  <body>
-    <h1>Astro</h1>
+  <body class="min-h-screen bg-gray-50">
+    <main class="container mx-auto px-4 py-8 max-w-7xl">
+      <header class="text-center mb-12">
+        <h1 class="text-5xl font-bold text-gray-900 mb-2">مطعم تكوين</h1>
+        <a
+          href={businessInfo.googleMaps}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-2 text-gray-600 hover:text-amber-600 transition-colors text-xl justify-center"
+        >
+          <MapPin size={20} />
+          <span>سيهات – حي الزهور</span>
+        </a>
+      </header>
+
+      <section class="bg-white rounded-lg shadow-md p-6 mb-12">
+        <div class="flex flex-col items-center gap-6">
+          {
+            businessInfo.hungerStation && (
+              <a
+                href={businessInfo.hungerStation}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-3 bg-amber-500 hover:bg-amber-600 text-white font-bold text-lg px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                aria-label="اطلب الآن"
+              >
+                <div class="flex items-center justify-center shrink-0">
+                  <HungerStationIcon class="w-full h-full" />
+                </div>
+                <span>اطلب الآن</span>
+              </a>
+            )
+          }
+
+          <div class="flex flex-wrap justify-center gap-6 items-center">
+            {/* Secondary CTA - Call Now */}
+            <a
+              href={`tel:${businessInfo.phone}`}
+              class="flex items-center gap-2 text-gray-600 hover:text-amber-600 transition-colors text-sm"
+            >
+              <Phone size={18} />
+              <span>اتصل</span>
+            </a>
+
+            <div class="flex items-center gap-2 relative">
+              <Clock size={18} class="text-gray-700" />
+              <button
+                id="hours-toggle"
+                class="text-gray-700 hover:text-amber-600 transition-colors cursor-pointer text-left text-sm"
+              >
+                {currentStatus}
+              </button>
+              <div
+                id="hours-schedule"
+                class="hidden absolute top-full mt-2 right-0 bg-white border border-gray-200 rounded-lg shadow-lg p-4 z-10"
+                style="min-width: 200px;"
+              >
+                <ul class="space-y-2">
+                  {
+                    businessInfo.hours.schedule.map(day => (
+                      <li class="flex justify-between text-sm">
+                        <span class="font-semibold">{day.day}</span>
+                        <span class="text-gray-600">
+                          {formatScheduleHours(day)}
+                        </span>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+              {
+                businessInfo.whatsapp && (
+                  <a
+                    href={businessInfo.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-gray-700 hover:text-amber-600 transition-colors"
+                    aria-label="WhatsApp"
+                  >
+                    <MessageCircle size={20} />
+                  </a>
+                )
+              }
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {
+        menuData.map(section => (
+          <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center border-b-4 border-amber-500 pb-3 inline-block w-full">
+              {section.name}
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {section.items.map(item => (
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                  {item.image && (
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      class="w-full h-48 object-cover"
+                    />
+                  )}
+                  <div class="p-5">
+                    <div class="flex items-center justify-between mb-2">
+                      <h3 class="text-xl font-bold text-gray-900">
+                        {item.name}
+                      </h3>
+                      <div class="flex items-center gap-2">
+                        {item.spicy && (
+                          <span class="text-2xl" title="حار">
+                            🌶️
+                          </span>
+                        )}
+                        <data class="text-2xl font-bold text-amber-600">
+                          {item.price.toFixed(0)}
+                        </data>
+                      </div>
+                    </div>
+                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+                      {item.description}
+                    </p>
+                    {item.optionGroups && item.optionGroups.length > 0 && (
+                      <div class="border-t pt-4 mt-4 border-gray-200">
+                        {item.optionGroups.map(group => (
+                          <div class="mb-3 last:mb-0">
+                            <h4 class="font-semibold text-gray-800 mb-2 text-sm">
+                              {group.name}:
+                            </h4>
+                            <ul class="space-y-1">
+                              {group.options.map(option => (
+                                <li class="text-sm text-gray-600 flex justify-between items-center">
+                                  <span>{option.name}</span>
+                                  {option.price !== undefined &&
+                                    option.price !== 0 && (
+                                      <data
+                                        class={`text-xs font-medium ${
+                                          option.price > 0
+                                            ? "text-green-600"
+                                            : "text-red-600"
+                                        }`}
+                                      >
+                                        {option.price > 0 ? "+" : ""}
+                                        {option.price.toFixed(0)}
+                                      </data>
+                                    )}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+
+      <script>
+        const hoursToggle = document.getElementById("hours-toggle")
+        const hoursSchedule = document.getElementById("hours-schedule")
+
+        if (hoursToggle && hoursSchedule) {
+          hoursToggle.addEventListener("click", e => {
+            e.stopPropagation()
+            hoursSchedule.classList.toggle("hidden")
+          })
+
+          document.addEventListener("click", e => {
+            const target = e.target as Node
+            if (
+              target &&
+              !hoursToggle.contains(target) &&
+              !hoursSchedule.contains(target)
+            ) {
+              hoursSchedule.classList.add("hidden")
+            }
+          })
+        }
+      </script>
+    </main>
   </body>
 </html>
