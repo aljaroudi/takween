@@ -17,6 +17,7 @@ const currentStatus = getCurrentStatus(businessInfo.hours)
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     <title>مطعم تكوين</title>
+    <meta name="description" content="مطعم تكوين - سيهات، حي الزهور" />
   </head>
   <body class="min-h-screen bg-gray-50">
     <main class="container mx-auto px-4 py-8 max-w-7xl">
@@ -68,7 +69,7 @@ const currentStatus = getCurrentStatus(businessInfo.hours)
                 id="hours-toggle"
                 class="text-gray-700 hover:text-amber-600 transition-colors cursor-pointer text-left text-sm"
               >
-                {currentStatus}
+                <span id="hours-status">{currentStatus}</span>
               </button>
               <div
                 id="hours-schedule"
@@ -123,6 +124,10 @@ const currentStatus = getCurrentStatus(businessInfo.hours)
                       src={item.image}
                       alt={item.name}
                       class="w-full h-48 object-cover"
+                      loading="lazy"
+                      decoding="async"
+                      width="400"
+                      height="192"
                     />
                   )}
                   <div class="p-5">
@@ -183,7 +188,93 @@ const currentStatus = getCurrentStatus(businessInfo.hours)
         ))
       }
 
-      <script>
+      <script define:vars={{ hours: businessInfo.hours }}>
+        // Update hours status client-side for real-time accuracy
+        function parseTime(timeStr) {
+          const [time, period] = timeStr.toLowerCase().split(/\s+/)
+          const [hours, minutes] = time.split(":").map(Number)
+          let hour24 = hours
+          if (period === "م" && hours !== 12) {
+            hour24 = hours + 12
+          } else if (period === "ص" && hours === 12) {
+            hour24 = 0
+          }
+          return hour24 * 60 + minutes
+        }
+
+        function getCurrentStatus(hours) {
+          const now = new Date()
+          const currentDay = now.getDay()
+          const currentMinutes = now.getHours() * 60 + now.getMinutes()
+
+          const previousDay = (currentDay - 1 + 7) % 7
+          const previousDaySchedule = hours.schedule.find(
+            s => s.dayOfWeek === previousDay
+          )
+
+          if (previousDaySchedule) {
+            const prevOpenMinutes = parseTime(previousDaySchedule.open)
+            const prevCloseMinutes = parseTime(previousDaySchedule.close)
+
+            if (prevCloseMinutes < prevOpenMinutes) {
+              if (currentMinutes < prevCloseMinutes) {
+                return `مفتوح حتى ${previousDaySchedule.close}`
+              }
+            }
+          }
+
+          const todaySchedule = hours.schedule.find(
+            s => s.dayOfWeek === currentDay
+          )
+
+          if (!todaySchedule) {
+            for (let i = 1; i <= 7; i++) {
+              const nextDay = (currentDay + i) % 7
+              const nextSchedule = hours.schedule.find(
+                s => s.dayOfWeek === nextDay
+              )
+              if (nextSchedule) {
+                return `يفتح ${nextSchedule.open}`
+              }
+            }
+            return "مغلق"
+          }
+
+          const openMinutes = parseTime(todaySchedule.open)
+          const closeMinutes = parseTime(todaySchedule.close)
+
+          const isOpen =
+            closeMinutes > openMinutes
+              ? currentMinutes >= openMinutes && currentMinutes < closeMinutes
+              : currentMinutes >= openMinutes || currentMinutes < closeMinutes
+
+          if (isOpen) {
+            return `مفتوح حتى ${todaySchedule.close}`
+          }
+
+          if (currentMinutes < openMinutes) {
+            return `يفتح ${todaySchedule.open}`
+          } else {
+            for (let i = 1; i <= 7; i++) {
+              const nextDay = (currentDay + i) % 7
+              const nextSchedule = hours.schedule.find(
+                s => s.dayOfWeek === nextDay
+              )
+              if (nextSchedule) {
+                return `يفتح ${nextSchedule.open}`
+              }
+            }
+            return "مغلق"
+          }
+        }
+
+        // Update status on page load
+        const hoursStatusEl = document.getElementById("hours-status")
+        if (hoursStatusEl) {
+          hoursStatusEl.textContent = getCurrentStatus(hours)
+        }
+
+        // Toggle hours schedule
         const hoursToggle = document.getElementById("hours-toggle")
         const hoursSchedule = document.getElementById("hours-schedule")
 
@@ -194,7 +285,7 @@ const currentStatus = getCurrentStatus(businessInfo.hours)
           })
 
           document.addEventListener("click", e => {
-            const target = e.target as Node
+            const target = e.target
             if (
               target &&
               !hoursToggle.contains(target) &&

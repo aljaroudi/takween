@@ -1,37 +1,35 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Rubik Variable", sans-serif;
+	--font-sans: "Rubik Variable", sans-serif;
 }
 
 @font-face {
-  font-family: 'saudi_riyal';
-  src: url('/fonts/saudi_riyal.woff2') format('woff2'),
-    url('/fonts/saudi_riyal.woff') format('woff'),
-    url('/fonts/saudi_riyal.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+	font-family: "saudi_riyal";
+	src:
+		url("/fonts/saudi_riyal.woff2") format("woff2"),
+		url("/fonts/saudi_riyal.woff") format("woff"),
+		url("/fonts/saudi_riyal.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
 }
 
-
 body {
-  direction: rtl;
-  text-align: right;
+	direction: rtl;
+	text-align: right;
 }
 
 data {
-  color: var(--color-stone-800);
-  display: flex;
-  flex-direction: row-reverse;
-  gap: 0.25rem;
-  align-items: center;
-  padding: 0.25rem 0.5rem;
-  /* justify-content: space-between; */
-  /* width: calc(4ch + 1em); */
+	color: var(--color-stone-800);
+	display: flex;
+	flex-direction: row-reverse;
+	gap: 0.25rem;
+	align-items: center;
+	padding: 0.25rem 0.5rem;
 }
 
 data::before {
-  content: "\e900";
-  font-family: "saudi_riyal";
+	content: "\e900";
+	font-family: "saudi_riyal", sans-serif;
 }
