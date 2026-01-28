@@ -6,8 +6,23 @@ export const menuData = [
         image: "/images/menu/ae399aff-29e8-4ba9-a66a-7bb9edc042e7.jpg",
         name: "رانج برجر",
         description: "لحم و جبنة وصوص محشوة في خبز مغطى بالبقسماط مقلية ومقرمشة",
-        price: 35,
-        spicy: false
+        price: 16,
+        spicy: false,
+        optionGroups: [
+          {
+            name: "النوع",
+            options: [
+              {
+                name: "دجاج",
+                price: 0
+              },
+              {
+                name: "لحم",
+                price: 1
+              }
+            ]
+          }
+        ]
       },
       {
         image: "/images/menu/6358e605-67a0-4e5f-82dc-33f042b2c9bf.jpg",
@@ -49,22 +64,37 @@ export const menuData = [
         image: "/images/menu/61b4ab0f-cc77-4938-910c-ffd4b77d5f05.jpg",
         name: "بيف ستيك",
         description: "لحم ستيك المطبوخ 10 ساعات مع شريحة برجر بخبز البطاطس مع شريحة جبن",
-        price: 44,
+        price: 27,
         spicy: false
       },
       {
         image: "/images/menu/5fe80bb8-370a-4140-aaa7-e84908d5317a.jpg",
         name: "بيف ستيك برجر",
         description: "لحم ستيك المطبوخ 10 ساعات مع شريحة برجر بخبز البطاطس مع شريحة جبن",
-        price: 42,
+        price: 29,
         spicy: false
       },
       {
-        image: "/images/menu/1097d035-ce94-4403-8179-badc628af252.jpg",
+        image: "/images/menu/360a1b0c-b3e3-44be-8171-8895b658b9a5.jpg",
         name: "زعتورا برجر",
         description: "برجر اللحم محشو في خبز البرجر المغطى بالزعتر",
-        price: 26.5,
-        spicy: false
+        price: 16,
+        spicy: false,
+        optionGroups: [
+          {
+            name: "النوع",
+            options: [
+              {
+                name: "دجاج",
+                price: 0
+              },
+              {
+                name: "لحم",
+                price: 2
+              }
+            ]
+          }
+        ]
       }
     ]
   },
@@ -72,7 +102,7 @@ export const menuData = [
     name: "برجر حجم كبير",
     items: [
       {
-        image: "/images/menu/2e22c44e-f81b-4239-847e-585e59a817b7.jpg",
+        image: "/images/menu/cheese-steak-burger.jpg",
         name: "شيز ستيك برجر",
         description: "برجر دجاج أو لحم مغطى بستيك مقطع بالجبن المذاب وصلصلة أيلاند والخس",
         price: 28,
@@ -87,7 +117,7 @@ export const menuData = [
               },
               {
                 name: "لحم",
-                price: 9.5
+                price: 4
               }
             ]
           }
@@ -160,7 +190,7 @@ export const menuData = [
         ]
       },
       {
-        image: "/images/menu/42c87bd1-ad47-40cf-a735-efb0a437f3bb.jpg",
+        image: "/images/menu/mushroom-burger.jpg",
         name: "مشروم برجر",
         description: "برجر كبير لحم أو دجاج مفروم مع الفطر المشوي وصلصة خاصة",
         price: 20,
@@ -301,7 +331,7 @@ export const menuData = [
     name: "برجر حجم عادي",
     items: [
       {
-        image: "/images/menu/25faffd3-7098-40c7-a63f-963840a256cb.jpg",
+        image: "/images/menu/classic-burger.jpg",
         name: "كلاسيك برجر",
         description: "لحم أو دجاج مفروم صافي مع المايوخردل والخس الطازج",
         price: 11,
@@ -327,50 +357,6 @@ export const menuData = [
         name: "جاكوار برجر",
         description: "لحم أو دجاج مفروم صافي مع صلصة أيلاند و أوراق الجرجير الطازجة",
         price: 11,
-        spicy: false,
-        optionGroups: [
-          {
-            name: "النوع",
-            options: [
-              {
-                name: "دجاج",
-                price: 0
-              },
-              {
-                name: "لحم",
-                price: 2
-              }
-            ]
-          }
-        ]
-      },
-      {
-        image: "/images/menu/e4c21b72-bf3c-495e-9868-3f5fdd301fe4.jpg",
-        name: "فيراري برجر",
-        description: "لحم أو دجاج مفروم صافي مع صلصة شيبوتلي وقطع الهلابينو والخس الطازج",
-        price: 11.5,
-        spicy: false,
-        optionGroups: [
-          {
-            name: "النوع",
-            options: [
-              {
-                name: "دجاج",
-                price: 0
-              },
-              {
-                name: "لحم",
-                price: 2
-              }
-            ]
-          }
-        ]
-      },
-      {
-        image: "/images/menu/13adfc38-fcdf-40be-b8fb-666bbc457b6b.jpg",
-        name: "أودي برجر",
-        description: "لحم أو دجاج مفروم صافي مع صلصة تندوري وشرائح الطماطم والخس الطازج",
-        price: 11.5,
         spicy: false,
         optionGroups: [
           {
@@ -445,7 +431,7 @@ export const menuData = [
     name: "هيلثي فود",
     items: [
       {
-        image: "/images/menu/7e28e45c-08af-464f-b199-53f5e487ded3.jpg",
+        image: "/images/menu/diety-burger.jpg",
         name: "دايتي برجر",
         description: "بخبز التوست البر بحبوب النخالة وشريحة برجر مع صوص خاص",
         price: 15.5,
@@ -499,7 +485,7 @@ export const menuData = [
         image: "/images/menu/88d0a697-ef39-441c-b4cd-c8b5f8016ba4.jpg",
         name: "بوكس صدور الدجاج",
         description: "شريحتين من فيلية الصدر مع إختيارك من البطاطس المهروس أو البصل المقلي أو ودجز أو حلقات البصل أو المشروم",
-        price: 38,
+        price: 28,
         spicy: false
       }
     ]
@@ -508,7 +494,7 @@ export const menuData = [
     name: "برجر بخبز التورتيلا",
     items: [
       {
-        image: "/images/menu/86e31434-36c0-45c4-98a7-ea48baad5215.jpg",
+        image: "/images/menu/porsche-burger.jpg",
         name: "بورش برجر",
         description: "لحم أو دجاج مفروم صافي مع صلصة خاصة بخبز التورتيلا",
         price: 11,
@@ -564,7 +550,7 @@ export const menuData = [
         spicy: false
       },
       {
-        image: "/images/menu/e9753536-f61c-425a-b11d-45a47400796e.jpg",
+        image: "/images/menu/spark.jpg",
         name: "سبارك",
         description: "شرائح البطاطس المقلية والمقرمشة مع قطع الدجاج المقرمش والصوص الخاص بنا و صوص الدايناميت",
         price: 25,
@@ -585,7 +571,7 @@ export const menuData = [
         spicy: false
       },
       {
-        image: "/images/menu/2f5de9da-ac07-4c52-a0f3-ff579824f1ed.jpg",
+        image: "/images/menu/twister.jpg",
         name: "تويستر",
         description: "دجاج مقرمش بخلطتنا الخاصة بخبز التورتيلا",
         price: 14,
@@ -602,7 +588,7 @@ export const menuData = [
         image: "/images/menu/784163b3-4393-45dd-8a1d-a5b942b805e0.jpg",
         name: "كلاسيك شريمب ديناميت",
         description: "روبيان مقلي مقرمش في ساندوتش بخبز البطاطس مع صوص",
-        price: 25,
+        price: 14,
         spicy: false,
         optionGroups: [
           {
@@ -797,7 +783,7 @@ export const menuData = [
         spicy: false
       },
       {
-        image: "/images/menu/b9c218e1-5a6a-4ac7-98e9-50688cb5f44a.jpg",
+        image: "/images/menu/happy-fries.jpg",
         name: "هابي فرايز",
         description: "بطاطس مقطعة بطريقة متعرجة وعليها صوص جبنة التشدر",
         price: 9,
@@ -811,7 +797,7 @@ export const menuData = [
         spicy: false
       },
       {
-        image: "/images/menu/e8e8b508-2af8-4eeb-a08b-5e43477630c9.jpg",
+        image: "/images/menu/jalapeno-fries.jpg",
         name: "أصابع الهالبينو",
         description: "خمس قطع من أصابع جبنة التشدر بقطع الهلابينو",
         price: 12,
@@ -845,7 +831,7 @@ export const menuData = [
         ]
       },
       {
-        image: "/images/menu/3fbb427c-28be-414b-b2c5-517b30bf52da.jpg",
+        image: "/images/menu/kids-meal-nuggets.jpg",
         name: "وجبة طفل ناجتس",
         description: "قطع ناجتس، تقدم مع بطاطس مقلية، عصير الربيع برتقال و لعبة",
         price: 16,
