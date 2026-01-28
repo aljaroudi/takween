@@ -21,5 +21,3 @@ type MenuSection = {
 	name: string
 	items: MenuItem[]
 }
-
-type MenuData = MenuSection[]
