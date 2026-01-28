@@ -857,6 +857,13 @@ export const menuData = [
         spicy: false
       },
       {
+        "image": "/images/menu/mojito-black-berry.jpg",
+        name: "موهيتو توت أسود",
+        description: "موهيتو منعش بنكهة التوت الأسود",
+        price: 11,
+        spicy: false
+      },
+      {
         image: "/images/menu/8ec124ad-3306-4e57-b629-debcaaed54c1.jpg",
         name: "موهيتو رمان",
         description: "موهيتو منعش بنكهة الرمان",
@@ -867,6 +874,13 @@ export const menuData = [
         image: "/images/menu/101bde04-3e15-4efb-ba3c-e45e419dbce9.jpg",
         name: "موهيتو فراولة",
         description: "موهيتو منعش بنكهة الفراولة",
+        price: 11,
+        spicy: false
+      },
+      {
+        image: "/images/menu/mojito-saffron.jpg",
+        name: "موهيتو برتقال مر",
+        description: "موهيتو منعش بنكهة البرتقال مر",
         price: 11,
         spicy: false
       }
@@ -898,7 +912,7 @@ export const menuData = [
         ]
       },
       {
-        image: "/images/menu/bfab7cd3-f4d7-4a09-baff-45095f89099f.jpg",
+        image: "/images/menu/kinza.jpg",
         name: "كينزا",
         description: "مشروب بيبسي غازي منعش",
         price: 2,
