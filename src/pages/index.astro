@@ -119,21 +119,32 @@ const currentStatus = getCurrentStatus(businessInfo.hours)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {section.items.map(item => (
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                  <picture>
-                    <source
-                      srcset={`${item.image}.webp`}
-                      type="image/webp"
-                    />
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      class="w-full aspect-square object-cover"
-                      loading="lazy"
-                      decoding="async"
-                      width="400"
-                      height="400"
-                    />
-                  </picture>
+                  {item.image ? (
+                    <picture>
+                      <source
+                        srcset={`${item.image}.webp`}
+                        type="image/webp"
+                      />
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        class="w-full aspect-square object-cover"
+                        loading="lazy"
+                        decoding="async"
+                        width="400"
+                        height="400"
+                      />
+                    </picture>
+                  ) : (
+                    <div
+                      class="w-full aspect-square bg-linear-to-br from-amber-100 to-amber-200 flex items-center justify-center"
+                      aria-hidden="true"
+                    >
+                      <span class="text-5xl font-bold text-amber-700/60 tracking-wide">
+                        تكوين
+                      </span>
+                    </div>
+                  )}
                   <div class="p-5">
                     <div class="flex items-center justify-between mb-2">
                       <h3 class="text-xl font-bold text-gray-900">
